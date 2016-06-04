@@ -3,13 +3,14 @@
 import java.util.HashSet;
 import java.util.Set;
 
+
 /**
  * This class provides an empty implementation of {@link SCvamo_a_compilarANTLRLexerVisitor},
  * which can be extended to create a visitor which only needs to handle a subset
  * of the available methods.
  *
  */
-public class SCvamo_a_compilarDefVarsVisitor extends SCvamo_a_compilarANTLRLexerBaseVisitor<Set<String>> {
+public class SCvamo_a_compilarUsedVarsVisitor extends SCvamo_a_compilarANTLRLexerBaseVisitor<Set<String>> {
     /**
      * {@inheritDoc}
      * <p>
@@ -18,8 +19,10 @@ public class SCvamo_a_compilarDefVarsVisitor extends SCvamo_a_compilarANTLRLexer
      */
     @Override
     public Set<String> visitCtrl(SCvamo_a_compilarANTLRLexerParser.CtrlContext ctx) {
-        Set<String> vars = visit(ctx.decls());
-        return vars;
+        Set<String> varDelta = visit(ctx.delta());
+        Set<String> varDecls = visit(ctx.decls());
+        varDecls.addAll(varDelta);
+        return varDecls;
     }
 
     /**
@@ -41,10 +44,10 @@ public class SCvamo_a_compilarDefVarsVisitor extends SCvamo_a_compilarANTLRLexer
      */
     @Override
     public Set<String> visitLetList(SCvamo_a_compilarANTLRLexerParser.LetListContext ctx) {
-        Set<String> varDeclLet = visit(ctx.decllet());
-        Set<String> varDecls = visit(ctx.decls());
-        varDecls.addAll(varDeclLet);
-        return varDecls;
+        Set<String> varDellet = visit(ctx.decllet());
+        Set<String> varDels = visit(ctx.decls());
+        varDels.addAll(varDellet);
+        return varDels;
     }
 
     /**
@@ -55,10 +58,7 @@ public class SCvamo_a_compilarDefVarsVisitor extends SCvamo_a_compilarANTLRLexer
      */
     @Override
     public Set<String> visitDispList(SCvamo_a_compilarANTLRLexerParser.DispListContext ctx) {
-        Set<String> varDeclDisp = visit(ctx.decldisp());
-        Set<String> varDecls = visit(ctx.decls());
-        varDecls.addAll(varDeclDisp);
-        return varDecls;
+        return  visit(ctx.decls());
     }
 
     /**
@@ -69,9 +69,7 @@ public class SCvamo_a_compilarDefVarsVisitor extends SCvamo_a_compilarANTLRLexer
      */
     @Override
     public Set<String> visitDisp(SCvamo_a_compilarANTLRLexerParser.DispContext ctx) {
-        Set<String> vars = new HashSet<String>();
-        vars.add(ctx.ID().getText());
-        return vars;
+        return new HashSet<String>();
     }
 
     /**
@@ -82,9 +80,7 @@ public class SCvamo_a_compilarDefVarsVisitor extends SCvamo_a_compilarANTLRLexer
      */
     @Override
     public Set<String> visitLet(SCvamo_a_compilarANTLRLexerParser.LetContext ctx) {
-        Set<String> vars = new HashSet<String>();
-        vars.add(ctx.ID().getText());
-        return vars;
+        return visit(ctx.delta());
     }
 
     /**
@@ -95,7 +91,10 @@ public class SCvamo_a_compilarDefVarsVisitor extends SCvamo_a_compilarANTLRLexer
      */
     @Override
     public Set<String> visitDelt(SCvamo_a_compilarANTLRLexerParser.DeltContext ctx) {
-        return new HashSet<String>();
+        Set<String> varDelt1 = visit(ctx.delta1());
+        Set<String> varDelt0pp = visit(ctx.delta0pp());
+        varDelt1.addAll(varDelt0pp);
+        return varDelt1;
     }
 
     /**
@@ -106,7 +105,10 @@ public class SCvamo_a_compilarDefVarsVisitor extends SCvamo_a_compilarANTLRLexer
      */
     @Override
     public Set<String> visitDelt0p(SCvamo_a_compilarANTLRLexerParser.Delt0pContext ctx) {
-        return new HashSet<String>();
+        Set<String> varDelt1 = visit(ctx.delta1());
+        Set<String> varDelt0pp = visit(ctx.delta0pp());
+        varDelt1.addAll(varDelt0pp);
+        return varDelt1;
     }
 
     /**
@@ -128,7 +130,7 @@ public class SCvamo_a_compilarDefVarsVisitor extends SCvamo_a_compilarANTLRLexer
      */
     @Override
     public Set<String> visitDelt0pp(SCvamo_a_compilarANTLRLexerParser.Delt0ppContext ctx) {
-        return new HashSet<String>();
+        return visit(ctx.delta0p());
     }
 
     /**
@@ -139,7 +141,10 @@ public class SCvamo_a_compilarDefVarsVisitor extends SCvamo_a_compilarANTLRLexer
      */
     @Override
     public Set<String> visitDelt1(SCvamo_a_compilarANTLRLexerParser.Delt1Context ctx) {
-        return new HashSet<String>();
+        Set<String> varDelt2 = visit(ctx.delta2());
+        Set<String> varDelt1pp = visit(ctx.delta1pp());
+        varDelt2.addAll(varDelt1pp);
+        return varDelt2;
     }
 
     /**
@@ -150,7 +155,10 @@ public class SCvamo_a_compilarDefVarsVisitor extends SCvamo_a_compilarANTLRLexer
      */
     @Override
     public Set<String> visitDelt1p(SCvamo_a_compilarANTLRLexerParser.Delt1pContext ctx) {
-        return new HashSet<String>();
+        Set<String> varDelt2 = visit(ctx.delta2());
+        Set<String> varDelt1pp = visit(ctx.delta1pp());
+        varDelt2.addAll(varDelt1pp);
+        return varDelt2;
     }
 
     /**
@@ -172,7 +180,7 @@ public class SCvamo_a_compilarDefVarsVisitor extends SCvamo_a_compilarANTLRLexer
      */
     @Override
     public Set<String> visitDelt1pp(SCvamo_a_compilarANTLRLexerParser.Delt1ppContext ctx) {
-        return new HashSet<String>();
+        return visit(ctx.delta1p());
     }
 
     /**
@@ -183,7 +191,10 @@ public class SCvamo_a_compilarDefVarsVisitor extends SCvamo_a_compilarANTLRLexer
      */
     @Override
     public Set<String> visitDelt2(SCvamo_a_compilarANTLRLexerParser.Delt2Context ctx) {
-        return new HashSet<String>();
+        Set<String> varDelt3 = visit(ctx.delta3());
+        Set<String> varDelt2pp = visit(ctx.delta2pp());
+        varDelt3.addAll(varDelt2pp);
+        return varDelt3;
     }
 
     /**
@@ -194,7 +205,10 @@ public class SCvamo_a_compilarDefVarsVisitor extends SCvamo_a_compilarANTLRLexer
      */
     @Override
     public Set<String> visitDelt2p(SCvamo_a_compilarANTLRLexerParser.Delt2pContext ctx) {
-        return new HashSet<String>();
+        Set<String> varDelt3 = visit(ctx.delta3());
+        Set<String> varDelt2pp = visit(ctx.delta2pp());
+        varDelt3.addAll(varDelt2pp);
+        return varDelt3;
     }
 
     /**
@@ -216,7 +230,7 @@ public class SCvamo_a_compilarDefVarsVisitor extends SCvamo_a_compilarANTLRLexer
      */
     @Override
     public Set<String> visitDelt2pp(SCvamo_a_compilarANTLRLexerParser.Delt2ppContext ctx) {
-        return new HashSet<String>();
+        return visit(ctx.delta2p());
     }
 
     /**
@@ -227,7 +241,10 @@ public class SCvamo_a_compilarDefVarsVisitor extends SCvamo_a_compilarANTLRLexer
      */
     @Override
     public Set<String> visitDelt3ID(SCvamo_a_compilarANTLRLexerParser.Delt3IDContext ctx) {
-        return new HashSet<String>();
+        Set<String> vars = new HashSet<String>();
+        vars.add(ctx.ID().getText());
+        //System.out.println("ID:"+ctx.ID().getText());
+        return vars;
     }
 
     /**
@@ -238,7 +255,7 @@ public class SCvamo_a_compilarDefVarsVisitor extends SCvamo_a_compilarANTLRLexer
      */
     @Override
     public Set<String> visitDelt3Curl(SCvamo_a_compilarANTLRLexerParser.Delt3CurlContext ctx) {
-        return new HashSet<String>();
+        return visit(ctx.delta());
     }
 
     /**
@@ -260,7 +277,10 @@ public class SCvamo_a_compilarDefVarsVisitor extends SCvamo_a_compilarANTLRLexer
      */
     @Override
     public Set<String> visitDelt3Paren(SCvamo_a_compilarANTLRLexerParser.Delt3ParenContext ctx) {
-        return new HashSet<String>();
+        Set<String> left = visit(ctx.delta(0));
+        Set<String> right = visit(ctx.delta(1));
+        left.addAll(right);
+        return left;
     }
 
     /**

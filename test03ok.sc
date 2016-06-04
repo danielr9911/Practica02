@@ -1,5 +1,5 @@
 disp sumadorMas3 (Int,Int,Int):Int "Suma entrada mas 3"
-           = input @ 1 + input @ 2 + input @ 3 + 3
+           = input @ 32762342342342342349 + input @ 2 + input @ 3 + 3
 
 disp componente (Int,Int,Int,Int,Int,Int):(Int,Int,Int)
    "Funcion compleja"

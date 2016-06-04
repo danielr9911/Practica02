@@ -6,4 +6,4 @@ disp noconst (Int,Int):Int "Funcion no constate" = input @ 2
 
 let dispositivo = const >> id >> noconst
 
-dispositivo
+dispositivo const
