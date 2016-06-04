@@ -1,0 +1,1 @@
+disp sumador1 (Int,Int,Int):Int "Sumador de tres numeros" = input @ 1 + input @ 2 + input @ 3 disp tres () : Int "Retorna siempre 3" = 3
